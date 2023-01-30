@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\AdminLogin;
 use App\Http\Requests\Admin\AdminPorfile;
 use App\Http\Requests\Admin\UpdatePassword;
 use App\Http\Requests\Auth\LoginRequest;
@@ -27,21 +28,67 @@ class AdminController extends Controller
     //admin logout
     public function adminLogout(Request $request)
     {
-        Auth::logout();
+        //for api
+    // $request->user()->currentAccessToken()->delete();
+    //     return response()->json([
+    //         "error"=>false,
+    //         "message"=>"Token is deleted",
+    //    ]);
+        //end
+         Auth::logout();
 
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect()->route('admin.login');
+          return redirect()->route('admin.login');
     }
     //end
 
     //admin login
-    public function adminLogin(LoginRequest $request)
+    public function adminLogin(AdminLogin $request)
     {
+        // $validator = $request->validated();
+        // $user = User::where('email', $validator['email'])->first();
+        // if ($user) {
+        //     if (Hash::check($validator['password'], $user->password)) {
+        //         //$token = $user->createToken('multi-vendor')->plainTextToken;
+        //         $url = "";
+        //         $noti = "";
+        //      if($user->role === 'admin'){
+        //         //return "hello";
+        //         $url = 'admin/dashboard';
+        //         $noti = [
+        //             "error"=>false,
+        //             "message"=>"Admin login successful",
+        //             "alert-type"=>"success"
+        //             ];
+        //  }
+        //  return redirect($url)->with($noti);
+
+                
+        //         // return response()->json([
+        //         //     "error"=>false,
+        //         //     "message"=>"Token get successful",
+        //         //     "token"=>$token
+        //         // ]);        
+        //     } else {            
+        //         return response()->json([
+        //             "error"=>false,
+        //             "message"=>"Password incorrect!"
+        //         ]);
+        //     }
+        // } 
+        // return response()->json([
+        //     "error"=>false,
+        //     "message"=>"User does not exists"
+        //     ]);
         $user = $request->only('email', 'password');
         if (Auth::attempt($user)) {
+            //for api
+            //  $token = Auth::user()->createToken('multi-ventor')->plainTextToken;
+            //     return response()->json([
+            //         "error"=>false,
+            //         "message"=>"Token get successful",
+            //         "token"=>$token
+            //     ]);
+            //end
           //check role
             $url = "";
             $noti = "";
@@ -52,18 +99,20 @@ class AdminController extends Controller
                 "message"=>"Admin login successful",
                 "alert-type"=>"success"
             ];
-        }
-        //end
+     }
+     return redirect($url)->with($noti);
+    }
+        
 
-            return redirect($url)->with($noti);
-        }
+            
+        // }
 
-        $noti = [
-            "error"=>false,
-            "message"=>"Username and password incorrect!",
-            "alert-type"=>"error"
-        ];
-        return redirect()->back()->with($noti);
+         $noti = [
+         "error"=>false,
+             "message"=>"Username and password incorrect!",
+             "alert-type"=>"error"
+         ];
+         return redirect()->back()->with($noti);
         // $request->authenticate();
 
         // $request->session()->regenerate();
@@ -81,6 +130,7 @@ class AdminController extends Controller
 
         // return redirect()->intended($url);
     }
+
    public function adminLoginForm()
    {
     return view('admin.admin_login');

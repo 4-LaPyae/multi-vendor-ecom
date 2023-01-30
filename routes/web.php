@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Vendor\VendorController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,9 +21,20 @@ Route::get('/', function () {
     return view('frontend.index');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+//user
+Route::middleware(['auth'])->group(function (){
+    Route::controller(UserController::class)->group(function (){
+        Route::get('/dashboard','userDashboard')->name('dashboard');
+        Route::post('/user/profile/store','userProfileStore')->name('user.profile.store');
+        Route::get('/user/logout','userLogout')->name('user.logout');
+        Route::post('/user/update/password','userUpdatePassword')->name('user.update.password');
+    });
+    
+    });
+//end
 
 //admin
 Route::group(['prefix'=>'admin'],function (){
@@ -41,8 +53,6 @@ Route::middleware(['auth','role:admin'])->group(function (){
         Route::get('admin/dashboard','adminDashboard')->name('admin.dashboard');
         Route::get('admin/logout','adminLogout')->name('admin.logout');
 });
- 
-
 });
 //end
 
@@ -68,6 +78,7 @@ Route::middleware(['auth','role:vendor'])->group(function (){
     }) ;
 });
 //end
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

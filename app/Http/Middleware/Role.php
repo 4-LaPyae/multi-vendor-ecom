@@ -17,13 +17,7 @@ class Role
     public function handle(Request $request, Closure $next,$role)
     {
         if($request->user()->role !== $role){
-            if($request->user()->role == 'vendor'){
-                return redirect('admin/login');
-            }
-            if($request->user()->role == 'admin'){
-                return redirect('vendor/login');
-            }
-            return redirect('/');
+            return redirect('dashboard');
         }
         return $next($request);
     }
