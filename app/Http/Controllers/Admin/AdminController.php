@@ -20,103 +20,60 @@ use Illuminate\View\View;
 
 class AdminController extends Controller
 {
-
-    public function adminDashboard(){
-        return view('admin.admin_dashboard');
+    //show admin dashboard
+    public function adminDashboard()
+    {
+        return view('admin.index');
     }
+    //end
 
     //admin logout
     public function adminLogout(Request $request)
     {
         //for api
-    // $request->user()->currentAccessToken()->delete();
-    //     return response()->json([
-    //         "error"=>false,
-    //         "message"=>"Token is deleted",
-    //    ]);
+        // $request->user()->currentAccessToken()->delete();
+        //     return response()->json([
+        //         "error"=>false,
+        //         "message"=>"Token is deleted",
+        //    ]);
         //end
-         Auth::logout();
-
-          return redirect()->route('admin.login');
+        Auth::logout();
+        return redirect()->route('admin.login');
     }
     //end
 
     //admin login
     public function adminLogin(AdminLogin $request)
     {
-        // $validator = $request->validated();
-        // $user = User::where('email', $validator['email'])->first();
-        // if ($user) {
-        //     if (Hash::check($validator['password'], $user->password)) {
-        //         //$token = $user->createToken('multi-vendor')->plainTextToken;
-        //         $url = "";
-        //         $noti = "";
-        //      if($user->role === 'admin'){
-        //         //return "hello";
-        //         $url = 'admin/dashboard';
-        //         $noti = [
-        //             "error"=>false,
-        //             "message"=>"Admin login successful",
-        //             "alert-type"=>"success"
-        //             ];
-        //  }
-        //  return redirect($url)->with($noti);
-
-                
-        //         // return response()->json([
-        //         //     "error"=>false,
-        //         //     "message"=>"Token get successful",
-        //         //     "token"=>$token
-        //         // ]);        
-        //     } else {            
-        //         return response()->json([
-        //             "error"=>false,
-        //             "message"=>"Password incorrect!"
-        //         ]);
-        //     }
-        // } 
-        // return response()->json([
-        //     "error"=>false,
-        //     "message"=>"User does not exists"
-        //     ]);
         $user = $request->only('email', 'password');
         if (Auth::attempt($user)) {
-            //for api
-            //  $token = Auth::user()->createToken('multi-ventor')->plainTextToken;
-            //     return response()->json([
-            //         "error"=>false,
-            //         "message"=>"Token get successful",
-            //         "token"=>$token
-            //     ]);
-            //end
-          //check role
+            //check role
             $url = "";
-            $noti = "";
-            if($request->user()->role === 'admin'){
+            if ($request->user()->role === 'admin') {
                 $url = 'admin/dashboard';
-            $noti = [
-                "error"=>false,
-                "message"=>"Admin login successful",
-                "alert-type"=>"success"
-            ];
-     }
-     return redirect($url)->with($noti);
-    }
-        
+                $noti = [
+                    "error" => false,
+                    "message" => "Admin login successful",
+                    "alert-type" => "success"
+                ];
+            } else {
+                $noti = [
+                    "error" => false,
+                    "message" => "This user is not admin role",
+                    "alert-type" => "error"
+                ];
+                return redirect()->back()->with($noti);
+            }
+            //end
+            return redirect($url)->with($noti);
+        }
+        $noti = [
+            "error" => false,
+            "message" => "Username and password incorrect!",
+            "alert-type" => "error"
+        ];
+        return redirect()->back()->with($noti);
 
-            
-        // }
-
-         $noti = [
-         "error"=>false,
-             "message"=>"Username and password incorrect!",
-             "alert-type"=>"error"
-         ];
-         return redirect()->back()->with($noti);
-        // $request->authenticate();
-
-        // $request->session()->regenerate();
-        
         // //check role
         // $url = "";
         // if($request->user()->role === 'admin'){
@@ -131,72 +88,135 @@ class AdminController extends Controller
         // return redirect()->intended($url);
     }
 
-   public function adminLoginForm()
-   {
-    return view('admin.admin_login');
-   }
-
-   public function AdminProfile(){
-
-    $id = Auth::user()->id;
-    $adminData = User::find($id);
-    return view('admin.admin_profile_view',compact('adminData'));
-
-}
-
-   public function AdminProfileStore(AdminPorfile $request){
-
-    $id = Auth::user()->id;
-    $data = User::find($id);
-
-    $validator = $request->validated();
-    $checkimage = $validator['photo'] ?? null;
-    if ($checkimage) {
-        $filename = date('YmdHi').$checkimage->getClientOriginalName();
-        $checkimage->move(public_path('upload/admin_images'),$filename);
-       $validator['photo'] = $filename;
-       $data->update($validator);
+    //show login form
+    public function adminLoginForm()
+    {
+        return view('admin.admin_login');
     }
-    $data->update($validator);
+    //end
 
-    $noti = [
-        'message' => 'Admin Profile Updated Successfully',
-        'alert-type' => 'success'
-    ];
+    //show admin profile
+    public function AdminProfile()
+    {
+        $id = Auth::user()->id;
+        $adminData = User::find($id);
+        return view('admin.admin_profile_view', compact('adminData'));
+    }
+    //end
 
-    return redirect()->back()->with($noti);
-
-} 
-
-public function AdminChangePassword(){
-    return view('admin.admin_change_psw');
-}
-
-public function AdminUpdatePassword(UpdatePassword $request){
-    $validator = $request->validated();
-
-    //check password
-    if (Hash::check($validator['old_password'], auth::user()->password)) {
-        if(!Hash::check($validator['new_password'],auth::user()->password)){
-            // Update The new password 
-            User::whereId(auth()->user()->id)->update([
-                'password' => Hash::make($validator['new_password'])
-            ]);
-            $noti = [
-                "message"=> " Password Changed Successfully",
-                "alert-type"=>"success"
-            ];
-            return back()->with($noti);
-
+    //update admin profile
+    public function AdminProfileStore(AdminPorfile $request)
+    {
+        $id = Auth::user()->id;
+        $data = User::find($id);
+        $validator = $request->validated();
+        $checkimage = $validator['photo'] ?? null;
+        if ($checkimage) {
+            $filename = date('YmdHi') . $checkimage->getClientOriginalName();
+            $checkimage->move(public_path('upload/admin_images'), $filename);
+            $validator['photo'] = $filename;
+            $data->update($validator);
         }
-        return back()->with("error", "message','New password can not be the old password!");
-
-        
+        $data->update($validator);
+        $noti = [
+            'message' => 'Admin Profile Updated Successfully',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($noti);
     }
+    //end    
 
-    return back()->with("error", "Old Password Doesn't Match!!");
+    //show password page
+    public function AdminChangePassword()
+    {
+        return view('admin.admin_change_psw');
+    }
+    //end
+
+    //update password
+    public function AdminUpdatePassword(UpdatePassword $request)
+    {
+        $validator = $request->validated();
+        //check password
+        if (Hash::check($validator['old_password'], auth::user()->password)) {
+            if (!Hash::check($validator['new_password'], auth::user()->password)) {
+                // Update The new password 
+                User::whereId(auth()->user()->id)->update([
+                    'password' => Hash::make($validator['new_password'])
+                ]);
+                $noti = [
+                    "message" => " Password Changed Successfully",
+                    "alert-type" => "success"
+                ];
+                return back()->with($noti);
+            }
+            return back()->with("error", "message','New password can not be the old password!");
+        }
+
+        return back()->with("error", "Old Password Doesn't Match!!");
+    }
+    //end
+
+    //show inactive vendor
+    public function inActiveVendor()
+    {
+
+        $inActiveVendor = User::where('status', 'inactive')
+            ->where('role', 'vendor')->latest()->get();
+        return view('backend.vendor.inactive_vendor', compact('inActiveVendor'));
+    }
+    //end
+
+    //inactive vendor details
+    public function inActiveVendorDetails($id){
+        $inActiveVendorDetails = User::findOrFail($id);
+        return view('backend.vendor.inactive_vendor_detail',compact('inActiveVendorDetails'));
+    }
+    //end
+
+    //show active vendor
+    public function activeVendor()
+    {
+        $activeVendor = User::where('status', 'active')
+            ->where('role', 'vendor')->latest()->get();
+        return view('backend.vendor.active_vendor', compact('activeVendor'));
+    }
+    //end
+
+    //active vendor approve
+    public function activeVendorApprove(Request $request){
+       $vendor = User::findOrFail($request->id);
+       $vendor->status = 'active';
+       $vendor->save();
+       $noti = [
+        'message' => 'Vendor Active Successfully',
+        'alert-type' => 'success'
+       ];
+
+    return redirect()->route('active.vendor')->with($noti);
+    }
+    //end
+
+
+    //inactive vendor details
+    public function activeVendorDetails($id){
+        $activeVendorDetails = User::findOrFail($id);
+        return view('backend.vendor.active_vendor_detail',compact('activeVendorDetails'));
+    }
+    //end
+    //inactive vendor approve
+    public function inActiveVendorApprove(Request $request){
+        $vendor = User::findOrFail($request->id);
+        $vendor->status = 'inactive';
+        $vendor->save();
+        $noti = [
+         'message' => 'Vendor InActive Successfully',
+         'alert-type' => 'success'
+        ];
  
-    
+     return redirect()->route('inactive.vendor')->with($noti);
+     }
+     //end
 
-}
+
 }

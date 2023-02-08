@@ -4,7 +4,7 @@
             <img src="{{ asset('adminbackend/assets/images/logo-icon.png') }}" class="logo-icon" alt="logo icon">
         </div>
         <div>
-            <h4 class="logo-text">Rukada</h4>
+            <h4 class="logo-text">SABANA</h4>
         </div>
         <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
         </div>
@@ -12,21 +12,34 @@
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li>
-            <a href="javascript:;" class="has-arrow">
+            <a href="{{ route('admin.dashboard') }}" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-home-circle'></i>
                 </div>
                 <div class="menu-title">Dashboard</div>
             </a>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                </div>
+                <div class="menu-title">Brand</div>
+            </a>
             <ul>
-                <li> <a href="index.html"><i class="bx bx-right-arrow-alt"></i>Default</a>
+                <li> <a href="{{ route('brands.index') }}"><i class="bx bx-right-arrow-alt"></i>All Brand</a>
                 </li>
-                <li> <a href="dashboard-eCommerce.html"><i class="bx bx-right-arrow-alt"></i>eCommerce</a>
+                <li> <a href="{{ route('brands.create') }}"><i class="bx bx-right-arrow-alt"></i>Add Brand </a>
                 </li>
-                <li> <a href="dashboard-analytics.html"><i class="bx bx-right-arrow-alt"></i>Analytics</a>
+            </ul>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Category</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('categories.index') }}"><i class="bx bx-right-arrow-alt"></i>All Category</a>
                 </li>
-                <li> <a href="dashboard-digital-marketing.html"><i class="bx bx-right-arrow-alt"></i>Digital Marketing</a>
-                </li>
-                <li> <a href="dashboard-human-resources.html"><i class="bx bx-right-arrow-alt"></i>Human Resources</a>
+                <li> <a href="{{ route('categories.create') }}"><i class="bx bx-right-arrow-alt"></i>Add Category</a>
                 </li>
             </ul>
         </li>
@@ -34,47 +47,68 @@
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
                 </div>
-                <div class="menu-title">Application</div>
+                <div class="menu-title">SubCategory</div>
             </a>
             <ul>
-                <li> <a href="app-emailbox.html"><i class="bx bx-right-arrow-alt"></i>Email</a>
+                <li> <a href="{{ route('subcategories.index') }}"><i class="bx bx-right-arrow-alt"></i>All SubCategory</a>
                 </li>
-                <li> <a href="app-chat-box.html"><i class="bx bx-right-arrow-alt"></i>Chat Box</a>
+                <li> <a href="{{ route('subcategories.create') }}"><i class="bx bx-right-arrow-alt"></i>Add SubCategory</a>
                 </li>
-                <li> <a href="app-file-manager.html"><i class="bx bx-right-arrow-alt"></i>File Manager</a>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Product Manage</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('products.index') }}"><i class="bx bx-right-arrow-alt"></i>All Product</a>
                 </li>
-                <li> <a href="app-contact-list.html"><i class="bx bx-right-arrow-alt"></i>Contatcs</a>
+                <li> <a href="{{ route('products.create') }}"><i class="bx bx-right-arrow-alt"></i>Add Product</a>
                 </li>
-                <li> <a href="app-to-do.html"><i class="bx bx-right-arrow-alt"></i>Todo List</a>
+
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Slider Manage</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('sliders.index') }}"><i class="bx bx-right-arrow-alt"></i>All Slider</a>
                 </li>
-                <li> <a href="app-invoice.html"><i class="bx bx-right-arrow-alt"></i>Invoice</a>
+                <li> <a href="{{ route('sliders.create') }}"><i class="bx bx-right-arrow-alt"></i>Add Slider</a>
                 </li>
-                <li> <a href="app-fullcalender.html"><i class="bx bx-right-arrow-alt"></i>Calendar</a>
+
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Banner Manage</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('banners.index') }}"><i class="bx bx-right-arrow-alt"></i>All Banner</a>
                 </li>
+                <li> <a href="{{ route('banners.create') }}"><i class="bx bx-right-arrow-alt"></i>Add Banner</a>
+                </li>
+
             </ul>
         </li>
         <li class="menu-label">UI Elements</li>
         <li>
-            <a href="widgets.html">
-                <div class="parent-icon"><i class='bx bx-cookie'></i>
-                </div>
-                <div class="menu-title">Widgets</div>
-            </a>
-        </li>
-        <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-cart'></i>
                 </div>
-                <div class="menu-title">eCommerce</div>
+                <div class="menu-title">Vendor Manage</div>
             </a>
             <ul>
-                <li> <a href="ecommerce-products.html"><i class="bx bx-right-arrow-alt"></i>Products</a>
+                <li> <a href="{{ route('active.vendor') }}"><i class="bx bx-right-arrow-alt"></i>Active Vendor</a>
                 </li>
-                <li> <a href="ecommerce-products-details.html"><i class="bx bx-right-arrow-alt"></i>Product Details</a>
-                </li>
-                <li> <a href="ecommerce-add-new-products.html"><i class="bx bx-right-arrow-alt"></i>Add New Products</a>
-                </li>
-                <li> <a href="ecommerce-orders.html"><i class="bx bx-right-arrow-alt"></i>Orders</a>
+                <li> <a href="{{ route('inactive.vendor') }}"><i class="bx bx-right-arrow-alt"></i>InActive Vendor</a>
                 </li>
             </ul>
         </li>

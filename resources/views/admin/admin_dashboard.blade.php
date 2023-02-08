@@ -23,7 +23,13 @@
 	<link rel="stylesheet" href="{{ asset('adminbackend/assets/css/dark-theme.css') }}" />
 	<link rel="stylesheet" href="{{ asset('adminbackend/assets/css/semi-dark.css') }}" />
 	<link rel="stylesheet" href="{{ asset('adminbackend/assets/css/header-colors.css') }}" />
+	<!-- DataTable -->
+	<link href="{{ asset('adminbackend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+	<!-- DataTable-->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+	<link href="{{ asset('adminbackend/assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	{{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 	<title>Rukada - Responsive Bootstrap 5 Admin Template</title>
 </head>
 
@@ -72,9 +78,21 @@
 		  });
 	  </script>
 	  <script src="{{ asset('adminbackend/assets/js/index.js') }}"></script>
+	  <!--Datatable-->
+<script src="{{ asset('adminbackend/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script>
+		$(document).ready(function() {
+			$('#example').DataTable();
+		  } );
+	</script>
+<!--Datatable-->
 	<!--app JS-->
 	<script src="{{ asset('adminbackend/assets/js/app.js') }}"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<!--sweetalert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+ 	<script src="{{ asset('adminbackend/assets/js/code.js') }}"></script>
+	<!--end-->
 
 <script>
  @if(Session::has('message'))
@@ -94,6 +112,15 @@
     break; 
  }
  @endif 
+</script>
+<script src="{{ asset('adminbackend/assets/plugins/input-tags/js/tagsinput.js') }}"></script>
+<script src='https://cdn.tiny.cloud/1/vdqx2klew412up5bcbpwivg1th6nrh3murc6maz8bukgos4v/tinymce/5/tinymce.min.js' referrerpolicy="origin">
+</script>
+
+<script>
+	tinymce.init({
+	  selector: '#mytextarea'
+	});
 </script>
 </body>
 

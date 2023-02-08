@@ -13,36 +13,45 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function userDashboard(){
+
+    //show website
+    public function userDashboard()
+    {
         $id = Auth::id();
         $userData = User::find($id);
-        return view('index',compact('userData'));
+        return view('index', compact('userData'));
     }
+    //end
 
-    public function userProfileStore(UserDetail $request){
+    //user update profile and save to user table
+    public function userProfileStore(UserDetail $request)
+    {
 
         $id = Auth::user()->id;
         $data = User::find($id);
-    
+
         $validator = $request->validated();
         $checkimage = $validator['photo'] ?? null;
         if ($checkimage) {
-            $filename = date('YmdHi').$checkimage->getClientOriginalName();
-            $checkimage->move(public_path('upload/user_images'),$filename);
-           $validator['photo'] = $filename;
-           $data->update($validator);
+            $filename = date('YmdHi') . $checkimage->getClientOriginalName();
+            $checkimage->move(public_path('upload/user_images'), $filename);
+            $validator['photo'] = $filename;
+            $data->update($validator);
         }
         $data->update($validator);
-    
+
         $noti = [
             'message' => 'User Profile Updated Successfully',
             'alert-type' => 'success'
         ];
-    
-        return redirect()->back()->with($noti);
-    } 
 
-    public function userLogout(Request $request){
+        return redirect()->back()->with($noti);
+    }
+    //end
+
+    //user logout
+    public function userLogout(Request $request)
+    {
         Auth::logout();
 
         $request->session()->invalidate();
@@ -56,30 +65,30 @@ class UserController extends Controller
 
         return redirect('/login')->with($notification);
     }
+    //end
 
-    public function userUpdatePassword(UpdatePassword $request){
+    //user password change
+    public function userUpdatePassword(UpdatePassword $request)
+    {
         $validator = $request->validated();
 
         //check password
         if (Hash::check($validator['old_password'], auth::user()->password)) {
-            if(!Hash::check($validator['new_password'],auth::user()->password)){
+            if (!Hash::check($validator['new_password'], auth::user()->password)) {
                 // Update The new password 
                 User::whereId(auth()->user()->id)->update([
                     'password' => Hash::make($validator['new_password'])
                 ]);
                 $noti = [
-                    "message"=> " Password Changed Successfully",
-                    "alert-type"=>"success"
+                    "message" => " Password Changed Successfully",
+                    "alert-type" => "success"
                 ];
                 return back()->with($noti);
-    
             }
             return back()->with("error", "message','New password can not be the old password!");
-    
-            
         }
-    
         return back()->with("error", "Old Password Doesn't Match!!");
     }
-    
+    //end
+
 }

@@ -125,7 +125,7 @@
 					<h6 class="mb-0">Vendor Info</h6>
 				</div>
 				<div class="col-sm-9 text-secondary">
-					<textarea name="vendor_short_info" class="form-control" id="inputAddress2" placeholder="Address " rows="3"></textarea>
+					<textarea name="vendor_short_info" class="form-control" id="inputAddress2" placeholder="Info " rows="3"></textarea>
 				</div>
 			</div>
 

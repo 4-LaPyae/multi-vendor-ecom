@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->string('phone')->nullable();
             $table->text('address')->nullable();
+            $table->string('vendor_join')->nullable();
+            $table->string('vendor_short_info')->nullable();
             $table->enum('role',['admin','user','vendor'])->default('user');
             $table->enum('status',['active','inactive'])->default('active');
             $table->rememberToken();
