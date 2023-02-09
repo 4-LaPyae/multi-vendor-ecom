@@ -32,9 +32,35 @@ class IndexController extends Controller
                         ->orderBy('id','desc')
                         ->get();
         //END
+
+        //HOT_DEALS
+        $hot_deals = Product::where('hot_deals',1)
+                    ->where('discount_price','!=',null)
+                    ->where('status',1)
+                    ->orderBy('id','desc')
+                    ->get();
+        //END
+        //SPECIAL_OFFER
+        $special_offer = Product::where('special_offer',1)
+                        ->where('status',1)
+                        ->orderBy('id','desc')
+                        ->get();
+        //END
+        //NEW PRODUCT
+        $new = Product::where('status',1)
+                ->where('status',1)
+                ->orderBy('id','desc')->limit(3)->get();
+        //END
+
+        //SPECIAL_DEALS
+        $special_deals = Product::where('special_deals',1)
+                            ->where('status',1)
+                            ->orderBy('id','desc')->limit(3)->get();
+        //EN
         return view('frontend.index',compact('skip_category_0',
                     'skip_product_0','skip_category_1','skip_product_1',
-                    'skip_category_2','skip_product_2'));
+                    'skip_category_2','skip_product_2','hot_deals',
+                    'special_offer','new','special_deals'));
     }
     public function productDetails($id,$slug){
         $product = Product::findOrFail($id);
