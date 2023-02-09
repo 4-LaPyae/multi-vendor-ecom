@@ -1,5 +1,5 @@
 @php
-    $banners = App\Models\Banner::orderBy('banner_title', 'asc')->get();
+    $banners = App\Models\Banner::orderBy('banner_title', 'asc')->limit(3)->get();
 @endphp
 <section class="banners mb-25">
     <div class="container">

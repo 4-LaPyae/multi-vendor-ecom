@@ -1,5 +1,5 @@
 <header class="header-area header-style-1 header-height-2">
-    <div class="mobile-promotion">
+    {{-- <div class="mobile-promotion">
         <span>Grand opening, <strong>up to 15%</strong> off all items. Only <strong>3 days</strong> left</span>
     </div>
     <div class="header-top header-top-ptb-1 d-none d-lg-block">
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
         <div class="container">
             <div class="header-wrap">
@@ -69,7 +69,7 @@
                 </div>
                 <div class="header-right">
                     <div class="search-style-2">
-                        <form action="#">
+                        {{-- <form action="#">
                             <select class="select-active">
                                 <option>All Categories</option>
                                 <option>Milks and Dairies</option>
@@ -84,11 +84,11 @@
                                 <option>Ice cream</option>
                             </select>
                             <input type="text" placeholder="Search for items..." />
-                        </form>
+                        </form> --}}
                     </div>
                     <div class="header-action-right">
                         <div class="header-action-2">
-                            <div class="search-location">
+                            {{-- <div class="search-location">
                                 <form action="#">
                                     <select class="select-active">
                                         <option>Your Location</option>
@@ -107,17 +107,17 @@
                                         <option>New York</option>
                                     </select>
                                 </form>
-                            </div>
+                            </div> --}}
 
-                            <div class="header-action-icon-2">
+                            {{-- <div class="header-action-icon-2">
                                 <a href="shop-wishlist.html">
                                     <img class="svgInject" alt="Nest"
                                         src="{{ asset('frontend/assets/imgs/theme/icons/icon-heart.svg') }}" />
                                     <span class="pro-count blue">6</span>
                                 </a>
                                 <a href="shop-wishlist.html"><span class="lable">Wishlist</span></a>
-                            </div>
-                            <div class="header-action-icon-2">
+                            </div> --}}
+                            {{-- <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="shop-cart.html">
                                     <img alt="Nest"
                                         src="{{ asset('frontend/assets/imgs/theme/icons/icon-cart.svg') }}" />
@@ -163,7 +163,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="header-action-icon-2">
                                 <a href="page-account.html">
                                     <img class="svgInject" alt="Nest"
@@ -214,14 +214,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
     <div class="header-bottom header-bottom-bg-color sticky-bar">
         <div class="container">
             <div class="header-wrap header-space-between position-relative">
@@ -249,7 +241,7 @@
                                         </li>
                                     @endforeach
                                 </ul>
-                                <ul class="end">
+                                {{-- <ul class="end">
                                     @foreach ($categories as $item)
                                         <li>
                                             <a href="shop-grid-right.html"> <img
@@ -258,7 +250,7 @@
                                         </li>
                                     @endforeach
 
-                                </ul>
+                                </ul> --}}
                             </div>
                             <div class="more_slide_open" style="display: none">
                                 <div class="d-flex categori-dropdown-inner">
@@ -296,7 +288,7 @@
                         <nav>
                             <ul>
                                 <li> 
-                                    <a class="active" href="index.html">Home  </a> 
+                                    <a class="active" href="{{ route('home') }}">Home  </a> 
                                 </li>
                                 @php
                                 $categories = App\Models\Category::orderBy('category_name','ASC')->limit(6)->get();
@@ -304,7 +296,7 @@
 
                                 @foreach ($categories as $category)
                                 <li>
-                                    <a href="">{{ $category->category_name }} <i class="fi-rs-angle-down"></i></a>
+                                    <a href="{{ url('product/category/'.$category->id.'/'.$category->category_slug) }}">{{ $category->category_name }} <i class="fi-rs-angle-down"></i></a>
                                     @php
                                         $subcategories = App\Models\SubCategory::where('category_id',$category->id)->orderBy('subcategory_name','asc')->get();
                                     @endphp
@@ -324,10 +316,10 @@
                 </div>
 
 
-                <div class="hotline d-none d-lg-flex">
+                {{-- <div class="hotline d-none d-lg-flex">
                     <img src="{{ asset('frontend/assets/imgs/theme/icons/icon-headphone.svg') }}" alt="hotline" />
                     <p>1900 - 888<span>24/7 Support Center</span></p>
-                </div>
+                </div> --}}
                 <div class="header-action-icon-2 d-block d-lg-none">
                     <div class="burger-icon burger-icon-white">
                         <span class="burger-icon-top"></span>

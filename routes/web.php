@@ -27,9 +27,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.index');
-});
+// Route::get('/', function () {
+//     return view('frontend.index');
+// });
+
+Route::get('/',[IndexController::class,'index'])->name('home');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -135,6 +137,13 @@ Route::middleware(['auth','role:vendor'])->group(function (){
 //FRONTEND DETAILS ALL ROUTE
     Route::get('product/details/{id}/{slug}',[IndexController::class,'productDetails'])
     ->name('product.details');
+    Route::get('vendor/details/{id}',[IndexController::class,'vendorDetails'])
+    ->name('vendor.details');
+    Route::get('vendor/all',[IndexController::class,'vendorAll'])
+    ->name('vendor.all');
+    Route::get('product/category/{id}/{slug}',[IndexController::class,'productCategory'])
+    ->name('product.category');
+
 //END
 
 Route::middleware('auth')->group(function () {

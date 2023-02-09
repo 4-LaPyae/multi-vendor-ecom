@@ -44,8 +44,6 @@
                                             <p class="mb-30">Already have an Vendor account? <a
                                                     href="{{ route('vendor.login') }}">Vendor Login</a></p>
                                         </div>
-
-
                                         <form method="POST" action="{{ route('vendor.register') }}">
                                             @csrf
                                             <div class="form-group">
@@ -56,7 +54,6 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-
                                             <div class="form-group">
                                                 <input type="text" id="username"  name="username"
                                                     class="form-control @error('username')
@@ -67,8 +64,6 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-
-
                                             <div class="form-group">
                                                 <input type="email" id="email" name="email"
                                                     class="form-control @error('email')
@@ -79,17 +74,15 @@
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-
                                             <div class="form-group">
                                                 <input type="text" id="phone"  name="phone"
                                                     placeholder="Phone" />
                                             </div>
 
-
                                             <div class="form-group">
                                                 <select name="vendor_join" class="form-select mb-3"
                                                     aria-label="Default select example">
-                                                    <option selected="">Open this select Join Date</option>
+                                                    <option selected="" disabled>Open this select Join Date</option>
                                                     <option value="2022">2022</option>
                                                     <option value="2023">2023</option>
                                                     <option value="2024">2024</option>

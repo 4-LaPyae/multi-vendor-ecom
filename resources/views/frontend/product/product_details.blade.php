@@ -3,7 +3,7 @@
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                <a href="{{ route('home') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                 <span></span> <a href="shop-grid-right.html">{{ $product->category['category_name'] }}</a>
                 <span></span> {{ $product->subcategory['subcategory_name'] }} <span></span>{{ $product->product_name }}
             </div>
@@ -15,17 +15,8 @@
                 <div class="product-detail accordion-detail">
                     <div class="row mb-50 mt-30">
                         <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
-                            <div>
-                                <img src="{{ asset($product->product_thambnail) }}">
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                @foreach ($product->images as $img)
-                                    <div>
-                                        <img src="{{ asset($img->photo_name) }}" class="rounded w-50">
-                                    </div>
-                                @endforeach
-                            </div>
-                            {{-- <div class="detail-gallery">
+                            
+                             <div class="detail-gallery">
                                 <span class="zoom-icon"><i class="fi-rs-search"></i></span>
                                 <!-- MAIN SLIDES -->
                                 <div class="product-image-slider">
@@ -41,7 +32,7 @@
                     <div><img src="{{ asset($img->photo_name) }}" alt="product image" /></div>
                      @endforeach
                                 </div>
-                            </div> --}}
+                            </div>
                             <!-- End Gallery -->
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
@@ -71,7 +62,7 @@
                                         </div>
                                     @else
                                         <div class="product-price primary-color float-left">
-                                            <span class="current-price text-brand">${{ $product->discount_price }}</span>
+                                            <span class="current-price text-brand">{{ $product->discount_price }}MMK</span>
                                             <span>
                                                 <span class="save-price font-md color3 ml-15">{{ round($discount) }}%
                                                     Off</span>
@@ -296,31 +287,25 @@
                                         </div>
                                     </div>
                                     <ul class="contact-infor mb-50">
+                                        @if(is_null($product->vendor_id))
+                                        <li><img src="assets/imgs/theme/icons/icon-location.svg" alt="" />
+                                            <strong>Address: </strong> <span></span></li>
+                                        <li><img src="assets/imgs/theme/icons/icon-contact.svg" alt="" />
+                                            <strong>Contact Seller:</strong><span></span></li>
+                                        @else
                                         <li><img src="assets/imgs/theme/icons/icon-location.svg" alt="" />
                                             <strong>Address: </strong> <span>{{ $product->vendor['address'] }}</span></li>
                                         <li><img src="assets/imgs/theme/icons/icon-contact.svg" alt="" />
                                             <strong>Contact Seller:</strong><span>{{ $product->vendor['phone'] }}</span></li>
-                                    </ul>
-                                    <div class="d-flex mb-55">
-                                        <div class="mr-30">
-                                            <p class="text-brand font-xs">Rating</p>
-                                            <h4 class="mb-0">92%</h4>
-                                        </div>
-                                        <div class="mr-30">
-                                            <p class="text-brand font-xs">Ship on time</p>
-                                            <h4 class="mb-0">100%</h4>
-                                        </div>
-                                        <div>
-                                            <p class="text-brand font-xs">Chat response</p>
-                                            <h4 class="mb-0">89%</h4>
-                                        </div>
-                                    </div>
-                                    <p>Noodles & Company is an American fast-casual restaurant that offers international and
-                                        American noodle dishes and pasta in addition to soups and salads. Noodles & Company
-                                        was founded in 1995 by Aaron Kennedy and is headquartered in Broomfield, Colorado.
-                                        The company went public in 2013 and recorded a $457 million revenue in 2017.In late
-                                        2018, there were 460 Noodles & Company locations across 29 states and Washington,
-                                        D.C.</p>
+                                        @endif                                       
+                                    </ul>                                 
+                                    @if(is_null($product->vendor_id))
+                                    <p></p>
+                                    @elseif (is_null($product->vendor['vendor_short_info']))
+                                    <p></p>
+                                    @else
+                                        <p>{{ $product->vendor['vendor_short_info'] }}</p>
+                                    @endif
                                 </div>
                                 <div class="tab-pane fade" id="Reviews">
                                     <!--Comments-->
