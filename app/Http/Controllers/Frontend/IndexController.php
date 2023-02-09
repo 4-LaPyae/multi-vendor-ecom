@@ -18,7 +18,23 @@ class IndexController extends Controller
         ->orderBy('id','desc')
         ->get();
         //END
-        return view('frontend.index',compact('skip_category_0','skip_product_0'));
+        //FASHION
+        $skip_category_1 = Category::skip(1)->first();
+        $skip_product_1 = Product::where('status',1)
+        ->where('category_id',$skip_category_1->id)
+        ->orderBy('id','desc')
+        ->get();
+        //END
+        //ELECTRONIC
+        $skip_category_2 = Category::skip(2)->first();
+        $skip_product_2 = Product::where('status',1)
+                        ->where('category_id',$skip_category_2->id)
+                        ->orderBy('id','desc')
+                        ->get();
+        //END
+        return view('frontend.index',compact('skip_category_0',
+                    'skip_product_0','skip_category_1','skip_product_1',
+                    'skip_category_2','skip_product_2'));
     }
     public function productDetails($id,$slug){
         $product = Product::findOrFail($id);
