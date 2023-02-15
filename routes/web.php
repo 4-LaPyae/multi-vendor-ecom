@@ -9,8 +9,11 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\CompareController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\Vendor\VendorController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Models\SubCategory;
@@ -31,21 +34,55 @@ use Illuminate\Support\Facades\Route;
 //     return view('frontend.index');
 // });
 
-Route::get('/',[IndexController::class,'index'])->name('home');
 
+Route::get('/',[IndexController::class,'Index'])->name('home');
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 //user
-Route::middleware(['auth'])->group(function (){
+Route::middleware(['auth','role:user'])->group(function (){
     Route::controller(UserController::class)->group(function (){
         Route::get('/dashboard','userDashboard')->name('dashboard');
         Route::post('/user/profile/store','userProfileStore')->name('user.profile.store');
         Route::get('/user/logout','userLogout')->name('user.logout');
         Route::post('/user/update/password','userUpdatePassword')->name('user.update.password');
     });
+
+    //wishlist
+    Route::controller(WishlistController::class)->group(function(){
+        Route::get('/wishlist','allWishlist')->name('wishlist');
+        Route::get('/get-wishlist-product','getWishlistProduct');
+        Route::get('/remove/product/wishlist/{id}','removeWishlist');
+    });
+    //end
+    //compare
+    Route::controller(CompareController::class)->group(function (){
+        Route::get('/compare','Compare')->name('compare');
+        Route::get('get/compare/product','getCompare');
+        Route::get('remove/compare/product/{id}','removeCompare');
+    });
+    //end
+
+     //my cart view
+     Route::controller(CartController::class)->group(function(){
+        Route::get('/mycart','myCart')->name('mycart');
+        Route::get('get/my/cart','getMyCart');
+        Route::get('remove/cart/{rowId}','removeCart');
+        Route::get('cart/decrement/{rowId}','cartDecrement');
+        Route::get('cart/increment/{rowId}','cartIncrement');
+
+    });
+    //end
     
     });
+    //compare
+    Route::controller(CompareController::class)->group(function(){
+        Route::post('add/product/compare','addToCompareProduct');
+    });
+    //end
+
+   
+    
 //end
 
 //admin
@@ -135,15 +172,44 @@ Route::middleware(['auth','role:vendor'])->group(function (){
 
 
 //FRONTEND DETAILS ALL ROUTE
-    Route::get('product/details/{id}/{slug}',[IndexController::class,'productDetails'])
+Route::controller(IndexController::class)->group(function(){
+    Route::get('product/details/{id}/{slug}','productDetails')
     ->name('product.details');
-    Route::get('vendor/details/{id}',[IndexController::class,'vendorDetails'])
+    Route::get('vendor/details/{id}','vendorDetails')
     ->name('vendor.details');
-    Route::get('vendor/all',[IndexController::class,'vendorAll'])
-    ->name('vendor.all');
-    Route::get('product/category/{id}/{slug}',[IndexController::class,'productCategory'])
-    ->name('product.category');
+    Route::get('vendor/all','vendorAll')->name('vendor.all');
+    Route::get('product/category/{id}/{slug}','catHeaderProduct')->name('product.category');
+    Route::get('product/subcategory/{id}/{slug}','subcatHeaderProduct');
+    Route::get('product/view/model/{id}','prodcutViewModel');
 
+});
+   
+//END
+
+//ADD TO CART WITH AJAX
+Route::controller(CartController::class)->group(function(){
+    //add to cart product details
+    Route::post('detailcart/data/store','detailcartDataStore');
+    //end
+    //add to cart quick view
+    Route::post('cart/data/store','cartDataStore');
+    //end
+    // CART DETAIL PRODCUT REMOVE
+    Route::get('minicart/product/remove/{rowId}','minicartProductRemove');
+    //END
+    //MINI CART
+    Route::get('/product/mini/cart','AddMiniCart');
+    //END
+    //MINI CART PRODCUT REMOVE
+    Route::get('minicart/product/remove/{rowId}','minicartProductRemove');
+    //END
+});
+//END
+
+//ADD PRODUCT TO WISHLIST
+Route::controller(WishlistController::class)->group(function(){
+    Route::post('add/product/wishlist','addProductWishlist');
+});
 //END
 
 Route::middleware('auth')->group(function () {

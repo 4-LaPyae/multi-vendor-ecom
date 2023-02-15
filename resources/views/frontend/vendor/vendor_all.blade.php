@@ -103,6 +103,12 @@
                                         </div>
                                     </div>
                         <div class="mb-10">
+<<<<<<< HEAD
+=======
+                        {{-- @php
+                        $products = App\Models\Product::where('vendor_id',$vendor->id)->get();
+                        @endphp --}}
+>>>>>>> e8eada7
                         <span class="font-small total-product">{{ count($vendor->products) }} products</span>
                         </div>
                     </div>

@@ -11,6 +11,10 @@ class Category extends Model
     use HasFactory,FillableTraits;
     protected $with = ['products'];
     public function products(){
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class)->where('status',1);
+    }
+
+    public function subcategories(){
+        return $this->hasMany(SubCategory::class);
     }
 }
