@@ -6,7 +6,6 @@
         <div class="section-title">
             <div class="title">
                 <h3>Featured Categories</h3>
-
             </div>
             <div class="slider-arrow slider-arrow-2 flex-right carausel-10-columns-arrow" id="carausel-10-columns-arrows"></div>
         </div>
@@ -15,13 +14,12 @@
                 @foreach ($categories as $category)
                 <div class="card-2 bg-11 wow animate__animated animate__fadeInUp" data-wow-delay="0s">
                     <figure class="img-hover-scale overflow-hidden">
-                        <a href="shop-grid-right.html"><img src="{{ $category->category_image }}" alt="" /></a>
+                        <a href="{{url('product/category/'.$category->id.'/'.$category->category_slug)}}"><img src="{{ $category->category_image }}" alt="" /></a>
                     </figure>
-                    <h6><a href="shop-grid-right.html">{{ $category->category_name }}</a></h6>
+                    <h6><a href="{{url('product/category/'.$category->id.'/'.$category->category_slug)}}">{{ $category->category_name }}</a></h6>
                     <span>{{ count($category->products) }}</span>
                 </div>  
-                @endforeach
-                
+                @endforeach    
             </div>
         </div>
     </div>

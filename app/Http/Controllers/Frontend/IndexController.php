@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\SubCategory;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class IndexController extends Controller
 {
@@ -68,6 +72,67 @@ class IndexController extends Controller
         $product_sizes = explode(',',$product->product_size);
         return view('frontend.product.product_details',compact('product','product_colours','product_sizes'));
         //var_dump($pro)
+    }
+
+    //VENDOR DETAILS
+    public function vendorDetails($id){
+        $vendor = User::findOrFail($id);
+        return view('frontend.vendor.vendor_details',compact('vendor'));
+    }
+    //END
+
+    //VENDOR ALL
+    public function vendorAll(){
+         $vendors = User::with('products')
+                        ->where([
+                            ['status','active'],
+                            ['role','vendor']
+                        ])
+                        ->orderBy('id','desc')
+                        ->get();
+        // $vendors = DB::table('users')
+        //     ->join('products', 'users.id', '=', 'vendor_id')
+        //     ->select('users.*', 'products.*')
+        //     ->get();
+            return view('frontend.vendor.vendor_all',compact('vendors'));
+
+        //return $users;
+    }
+    //END
+
+    //HEADER CATEGORY SHOW
+    public function catHeaderProduct(Request $request,$id,$slug){
+        $breadcat = Category::with('products')->where("id",$id)->first();
+        $categories = Category::with('products')->orderBy('category_name','ASC')->get();
+        $newproducts = Product::orderBy('id','desc')->limit(4)->get();
+        return view('frontend.product.category_view',compact('breadcat','categories','newproducts')); 
+    }
+    //END
+
+    //HEADER CATEGORY SHOW
+    public function subcatHeaderProduct(Request $request,$id,$slug){
+        $subcategories = SubCategory::with('products','category')->where('id',$id)->first();
+        $categories = Category::orderBy('category_name','asc')->get();
+        $newProduct = Product::orderBy('id','desc')->limit(3)->get();
+        return view('frontend.product.subcategory_view',compact('subcategories','newProduct','categories'));
+    }
+    //END
+
+    //PRODUCT VIEW MODEL WITH AJAX
+    public function prodcutViewModel($id){
+        $product = Product::with('category','brand')->findOrFail($id);
+        $color = $product->product_color;
+        $product_color = explode(',', $color);
+
+        $size = $product->product_size;
+        $product_size = explode(',', $size);
+
+        return response()->json([
+            "product"=>$product,
+            "color"=>$product_color,
+            "size"=>$product_size
+        ]);
 
     }
+    //END
 }

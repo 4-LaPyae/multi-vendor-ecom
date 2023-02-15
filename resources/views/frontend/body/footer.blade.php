@@ -1,5 +1,5 @@
 <footer class="main">
-    <section class="newsletter mb-15 wow animate__animated animate__fadeIn">
+    {{-- <section class="newsletter mb-15 wow animate__animated animate__fadeIn">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <section class="featured section-padding">
         <div class="container">
             <div class="row">
@@ -125,7 +125,7 @@
                 <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
                     <h4 class="widget-title">Account</h4>
                     <ul class="footer-list mb-sm-5 mb-md-0">
-                        <li><a href="#">Sign In</a></li>
+                        <li><a href="{{ route('login') }}">Sign In</a></li>
                         <li><a href="#">View Cart</a></li>
                         <li><a href="#">My Wishlist</a></li>
                         <li><a href="#">Track My Order</a></li>
