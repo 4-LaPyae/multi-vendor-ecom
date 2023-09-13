@@ -3,11 +3,7 @@
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-<<<<<<< HEAD
-                <a href="{{ route('home') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-=======
                 <a href="" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
->>>>>>> e8eada7
                 <span></span> Vendor Details Page
             </div>
         </div>
@@ -21,14 +17,10 @@
             <div class="col-lg-4-5">
                 <div class="shop-product-fillter">
                     <div class="totall-product">
-<<<<<<< HEAD
-                        <p>We found <strong class="text-brand">{{ count($vendor->products) }}</strong> items for you!</p>
-=======
                         @php
                             $products = App\Models\Product::where('vendor_id',$vendor->id)->get();
                         @endphp
                         <p>We found <strong class="text-brand">{{ count($products) }}</strong> items for you!</p>
->>>>>>> e8eada7
                     </div>
                     {{-- <div class="sort-by-product-area">
                         <div class="sort-by-cover mr-10">
@@ -72,11 +64,7 @@
                     </div> --}}
                 </div>
                 <div class="row product-grid">
-<<<<<<< HEAD
-                    @foreach ($vendor->products as $product)
-=======
                     @foreach ($products as $product)
->>>>>>> e8eada7
                         <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                             <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
                                 <div class="product-img-action-wrap">
@@ -126,17 +114,9 @@
                                         <span class="font-small ml-5 text-muted"> (4.0)</span>
                                     </div>
                                     <div>
-<<<<<<< HEAD
-                                        
-                                            <span class="font-small text-muted">By <a
-                                                    href="vendor-details-1.html">{{ $product['vendor']['name'] }}</a></span>
-
-
-=======
                
                                             <span class="font-small text-muted">By <a
                                                     href="vendor-details-1.html">{{ $product['vendor']['name'] }}</a></span>
->>>>>>> e8eada7
                                     </div>
                                     <div class="product-card-bottom">
 

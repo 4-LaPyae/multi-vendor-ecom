@@ -289,27 +289,6 @@
                                         </div>
                                     </div>
                                     <ul class="contact-infor mb-50">
-<<<<<<< HEAD
-                                        @if(is_null($product->vendor_id))
-                                        <li><img src="assets/imgs/theme/icons/icon-location.svg" alt="" />
-                                            <strong>Address: </strong> <span></span></li>
-                                        <li><img src="assets/imgs/theme/icons/icon-contact.svg" alt="" />
-                                            <strong>Contact Seller:</strong><span></span></li>
-                                        @else
-                                        <li><img src="assets/imgs/theme/icons/icon-location.svg" alt="" />
-                                            <strong>Address: </strong> <span>{{ $product->vendor['address'] }}</span></li>
-                                        <li><img src="assets/imgs/theme/icons/icon-contact.svg" alt="" />
-                                            <strong>Contact Seller:</strong><span>{{ $product->vendor['phone'] }}</span></li>
-                                        @endif                                       
-                                    </ul>                                 
-                                    @if(is_null($product->vendor_id))
-                                    <p></p>
-                                    @elseif (is_null($product->vendor['vendor_short_info']))
-                                    <p></p>
-                                    @else
-                                        <p>{{ $product->vendor['vendor_short_info'] }}</p>
-                                    @endif
-=======
                                         @if ($product->vendor_id == null)
                                         @else
                                             <li><img src="assets/imgs/theme/icons/icon-location.svg" alt="" />
@@ -343,7 +322,6 @@
                                         The company went public in 2013 and recorded a $457 million revenue in 2017.In late
                                         2018, there were 460 Noodles & Company locations across 29 states and Washington,
                                         D.C.</p>
->>>>>>> e8eada7
                                 </div>
                                 <div class="tab-pane fade" id="Reviews">
                                     <!--Comments-->

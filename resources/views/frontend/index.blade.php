@@ -44,13 +44,8 @@
                                                     class="fi-rs-heart"></i></a>
                                             <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i
                                                     class="fi-rs-shuffle"></i></a>
-<<<<<<< HEAD
                                             <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
                                                 data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-=======
-                                              <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal" id="{{ $product->id }}" onclick="productView(this.id)"><i class="fi-rs-eye"></i></a>
-                </div>
->>>>>>> e8eada7
                                         </div>
                                         @php
                                             $amount = $product->selling_price - $product->discount_price;
@@ -122,10 +117,6 @@
     </section>
     <!--End Beauty Category -->
 
-<<<<<<< HEAD
-
-=======
->>>>>>> e8eada7
     <!-- Fashion Category -->
     <section class="product-tabs section-padding position-relative">
         <div class="container">
@@ -147,7 +138,6 @@
                                                 href="{{ url('product/details/' . $product->id . '/' . $product->product_slug) }}">
                                                 <img class="default-img" src="{{ asset($product->product_thambnail) }}"
                                                     alt="" />
-<<<<<<< HEAD
 
                                             </a>
                                         </div>
@@ -193,64 +183,11 @@
                                                 <span class="font-small text-muted">By <a
                                                         href="vendor-details-1.html">{{ $product['vendor']['name'] }}</a></span>
                                             @endif
-=======
-
-                                            </a>
-                                        </div>
-                                        <div class="product-action-1">
-                                            <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i
-                                                    class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i
-                                                    class="fi-rs-shuffle"></i></a>
-                                             <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal" id="{{ $product->id }}" onclick="productView(this.id)"><i class="fi-rs-eye"></i></a>
-                </div>
-                                        </div>
-                                        @php
-                                            $amount = $product->selling_price - $product->discount_price;
-                                            $discount = ($amount / $product->selling_price) * 100;
-                                        @endphp
-                                        <div class="product-badges product-badges-position product-badges-mrg">
-
-                                            @if ($product->discount_price == null)
-                                                <span class="new">New</span>
-                                            @else
-                                                <span class="hot"> {{ round($discount) }} %</span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="product-content-wrap">
-                                        <div class="product-category">
-                                            <a href="shop-grid-right.html">{{ $product['category']['category_name'] }}</a>
-                                        </div>
-                                        <h2><a
-                                                href="{{ url('product/details/' . $product->id . '/' . $product->product_slug) }}">
-                                                {{ $product->product_name }} </a></h2>
-                                        <div class="product-rate-cover">
-                                            <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width: 90%"></div>
-                                            </div>
-                                            <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                        </div>
-                                        <div>
-                                            @if ($product->vendor_id == null)
-                                                <span class="font-small text-muted">By <a
-                                                        href="vendor-details-1.html">Owner</a></span>
-                                            @else
-                                                <span class="font-small text-muted">By <a
-                                                        href="vendor-details-1.html">{{ $product['vendor']['name'] }}</a></span>
-                                            @endif
-
-
-
-                                        </div>
-                                        <div class="product-card-bottom">
->>>>>>> e8eada7
 
                                             @if ($product->discount_price == null)
                                                 <div class="product-price">
                                                     <span>{{ $product->selling_price }}MMK</span>
 
-<<<<<<< HEAD
 
                                         </div>
                                         <div class="product-card-bottom">
@@ -259,8 +196,6 @@
                                                 <div class="product-price">
                                                     <span>{{ $product->selling_price }}MMK</span>
 
-=======
->>>>>>> e8eada7
                                                 </div>
                                             @else
                                                 <div class="product-price">
@@ -270,20 +205,6 @@
                                             @endif
 
 
-<<<<<<< HEAD
-=======
-
-                                            <div class="add-cart">
-                                                <a class="add" href="shop-cart.html"><i
-                                                        class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end product card-->
-                        @endforeach
->>>>>>> e8eada7
 
                                             <div class="add-cart">
                                                 <a class="add" href="shop-cart.html"><i
@@ -300,17 +221,12 @@
                     </div>
                     <!--End product-grid-4-->
 
-<<<<<<< HEAD
                     </div>
                     <!--End product-grid-4-->
 
     </section>
     <!--Fashsion Category -->
 
-=======
-    </section>
-    <!--Fashsion Category -->
->>>>>>> e8eada7
     <!-- Electronic -->
     <section class="product-tabs section-padding position-relative">
         <div class="container">
@@ -339,12 +255,8 @@
                                                 href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                             <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i
                                                     class="fi-rs-shuffle"></i></a>
-<<<<<<< HEAD
                                             <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
                                                 data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-=======
-                                            <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal" id="{{ $product->id }}" onclick="productView(this.id)"><i class="fi-rs-eye"></i></a>
->>>>>>> e8eada7
                                         </div>
                                         @php
                                             $amount = $product->selling_price - $product->discount_price;
@@ -411,11 +323,8 @@
                     <!--End product-grid-4-->
     </section>
     <!-- End-->
-<<<<<<< HEAD
     <!--End 4 columns-->
 
-=======
->>>>>>> e8eada7
     <!-- HOT_DEALS AND SPECIAL_OFFER -->
     <section class="section-padding mb-30">
         <div class="container">
@@ -583,11 +492,6 @@
             </div>
         </div>
     </section>
-<<<<<<< HEAD
-=======
-    <!--END-->
-    <!--End 4 columns-->
->>>>>>> e8eada7
 
     <!--Vendor List -->
     @include('frontend.home.home_vendor_list')

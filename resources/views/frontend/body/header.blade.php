@@ -87,13 +87,8 @@
                         </form> --}}
                     </div>
                     <div class="header-action-right">
-<<<<<<< HEAD
-                        <div class="header-action-2">
-                            {{-- <div class="search-location">
-=======
                          <div class="header-action-2">
                             <div class="search-location">
->>>>>>> e8eada7
                                 <form action="#">
                                     <select class="select-active">
                                         <option>Your Location</option>
@@ -112,12 +107,6 @@
                                         <option>New York</option>
                                     </select>
                                 </form>
-<<<<<<< HEAD
-                            </div> --}}
-
-                            {{-- <div class="header-action-icon-2">
-                                <a href="shop-wishlist.html">
-=======
                             </div>
                             @auth
                             <div class="header-action-icon-2">
@@ -128,23 +117,15 @@
                             </div>
                              <div class="header-action-icon-2">
                                 <a href="{{ route('wishlist') }}">
->>>>>>> e8eada7
                                     <img class="svgInject" alt="Nest"
                                         src="{{ asset('frontend/assets/imgs/theme/icons/icon-heart.svg') }}" />
                                         <span class="pro-count blue" id="wishQty"></span>
                                 </a>
-<<<<<<< HEAD
-                                <a href="shop-wishlist.html"><span class="lable">Wishlist</span></a>
-                            </div> --}}
-                            {{-- <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="shop-cart.html">
-=======
                                 <a href="{{ route('wishlist') }}"><span class="lable">Wishlist</span></a>
                             </div>  
                             @endauth                          
                              <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="{{ route('mycart') }}">
->>>>>>> e8eada7
                                     <img alt="Nest"
                                         src="{{ asset('frontend/assets/imgs/theme/icons/icon-cart.svg') }}" />
                                     <span class="pro-count blue" id="cartQty">0</span>
@@ -165,11 +146,7 @@
                                         </div>
                                     </div>
                                 </div>
-<<<<<<< HEAD
-                            </div> --}}
-=======
                              </div>
->>>>>>> e8eada7
                             <div class="header-action-icon-2">
                                 <a href="page-account.html">
                                     <img class="svgInject" alt="Nest"
@@ -294,11 +271,7 @@
                         <nav>
                             <ul>
                                 <li> 
-<<<<<<< HEAD
-                                    <a class="active" href="{{ route('home') }}">Home  </a> 
-=======
                                     <a class="active" href="{{route('home')}}">Home  </a> 
->>>>>>> e8eada7
                                 </li>
                                 @php
                                 $categories = App\Models\Category::with('subcategories')->orderBy('category_name','ASC')->limit(6)->get();
@@ -306,15 +279,10 @@
 
                                 @foreach ($categories as $category)
                                 <li>
-<<<<<<< HEAD
                                     <a href="{{ url('product/category/'.$category->id.'/'.$category->category_slug) }}">{{ $category->category_name }} <i class="fi-rs-angle-down"></i></a>
                                     @php
                                         $subcategories = App\Models\SubCategory::where('category_id',$category->id)->orderBy('subcategory_name','asc')->get();
                                     @endphp
-=======
-                                    <a href="{{ route('product.category',["id"=>$category->id,"slug"=>$category->category_slug])}}">{{ $category->category_name }} <i class="fi-rs-angle-down"></i></a>
-                                   
->>>>>>> e8eada7
                                     <ul class="sub-menu">
                                         @foreach($category->subcategories as $subcategory)   
                                         <li><a href="{{url('product/subcategory/'.$subcategory->id.'/'.$subcategory->subcategory_slug)}}">{{ $subcategory->subcategory_name }}</a></li>

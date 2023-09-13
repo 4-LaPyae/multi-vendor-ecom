@@ -18,6 +18,6 @@ class IndexController extends Controller
         return view('frontend.product.product_details',compact('product','product_colours','product_sizes'));
         //var_dump($pro)
 
-        return view('frontend.product.category_view',compact('products','categories','breadcat'));
+        //return view('frontend.product.category_view',compact('products','categories','breadcat'));
     }
 }
